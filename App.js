@@ -1,10 +1,13 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { View } from "react-native";
 import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback, useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Asset } from "expo-asset";
+import { NavigationContainer } from "@react-navigation/native";
+import LoggedNav from "./navigators/LoggedNav";
+import { ApolloProvider } from "@apollo/client";
+import client from "./apollo";
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -37,18 +40,12 @@ export default function App() {
     return null;
   }
   return (
-    <View onLayout={onLayoutRootView} style={styles.container}>
-      <Text>This is NomadCoffee's Main Page</Text>
-      <StatusBar style="auto" />
+    <View onLayout={onLayoutRootView} style={{ flex: 1 }}>
+      <ApolloProvider client={client}>
+        <NavigationContainer>
+          <LoggedNav />
+        </NavigationContainer>
+      </ApolloProvider>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
