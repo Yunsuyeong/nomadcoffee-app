@@ -44,7 +44,7 @@ export const cache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
-        seeFeed: offsetLimitPagination(),
+        seeCoffeeShops: offsetLimitPagination(),
       },
     },
   },

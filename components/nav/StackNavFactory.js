@@ -19,19 +19,7 @@ const StackNavFactory = ({ screenName }) => {
       }}
     >
       {screenName === "Home" ? (
-        <Stack.Screen
-          name={"SHome"}
-          component={Home}
-          options={{
-            headerTitle: () => (
-              <Image
-                style={{ width: 120 }}
-                resizeMode="contain"
-                source={require("../../assets/logo.png")}
-              />
-            ),
-          }}
-        />
+        <Stack.Screen name={"SHome"} component={Home} />
       ) : null}
       {screenName === "Search" ? (
         <Stack.Screen
