@@ -5,8 +5,8 @@ import AuthButton from "../components/AuthButton";
 import AuthLayout from "../components/AuthLayout";
 import { TextInput } from "../components/AuthShared";
 import { isLoggedInVar, LogUserIn } from "../apollo";
-import ScreenLayout from "../components/ScreenLayout";
 import styled from "styled-components";
+import useMe from "../hooks/useMe";
 
 const Log_In_Mutation = gql`
   mutation login($username: String!, $password: String!) {
@@ -18,12 +18,22 @@ const Log_In_Mutation = gql`
   }
 `;
 
+const Container = styled.View`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: black;
+`;
+
 const Title = styled.Text`
   color: white;
   font-size: 20px;
+  margin-top: 20px;
 `;
 
 const Profile = ({ route: { params } }) => {
+  const { data } = useMe();
   const isLoggedIn = useReactiveVar(isLoggedInVar);
   const { control, handleSubmit, formState, setError } = useForm({
     mode: "onChange",
@@ -101,9 +111,10 @@ const Profile = ({ route: { params } }) => {
       />
     </AuthLayout>
   ) : (
-    <ScreenLayout>
-      <Title>Profile</Title>
-    </ScreenLayout>
+    <Container>
+      <Title>{data?.me?.username}'s Profile</Title>
+      <Title>Email : {data?.me?.email}</Title>
+    </Container>
   );
 };
 

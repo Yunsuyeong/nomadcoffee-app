@@ -37,19 +37,7 @@ const StackNavFactory = ({ screenName }) => {
         />
       ) : null}
       {screenName === "Profile" ? (
-        <Stack.Screen
-          name={"SProfile"}
-          component={Profile}
-          options={{
-            headerTitle: () => (
-              <Image
-                style={{ width: 120 }}
-                resizeMode="contain"
-                source={require("../../assets/logo.png")}
-              />
-            ),
-          }}
-        />
+        <Stack.Screen name={"SProfile"} component={Profile} />
       ) : null}
     </Stack.Navigator>
   );
