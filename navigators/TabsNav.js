@@ -2,6 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import StackNavFactory from "../components/nav/StackNavFactory";
 import TabIcon from "../components/nav/TabIcon";
+import { View } from "react-native";
 
 const Tabs = createBottomTabNavigator();
 
@@ -38,6 +39,23 @@ const TabsNav = () => {
       >
         {() => <StackNavFactory screenName="Search" />}
       </Tabs.Screen>
+      <Tabs.Screen
+        name="Camera"
+        component={View}
+        listeners={({ navigation }) => {
+          return {
+            tabPress: (e) => {
+              e.preventDefault();
+              navigation.navigate("Upload");
+            },
+          };
+        }}
+        options={{
+          tabBarIcon: ({ focused, color, size }) => (
+            <TabIcon iconName={"camera"} color={color} focused={focused} />
+          ),
+        }}
+      />
       <Tabs.Screen
         name="Profile"
         options={{
